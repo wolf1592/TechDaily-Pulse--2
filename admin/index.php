@@ -1,9 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION['admin'])) {
-    header("Location: /admin/login.php");
-    exit;
-}
+require_once '../api/db.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,15 +9,15 @@ if (!isset($_SESSION['admin'])) {
         <aside class="w-64 bg-white h-screen p-6">
             <h1 class="text-2xl font-bold mb-8">Admin Paneli</h1>
             <nav class="space-y-4">
-                <a href="/admin/index.php" class="block text-gray-700">Dashboard</a>
-                <a href="/admin/articles.php" class="block text-gray-700">Haberler</a>
-                <a href="/admin/categories.php" class="block text-gray-700">Kategoriler</a>
-                <a href="/api/logout.php" class="block text-red-600">Çıkış</a>
+                <a href="/web/2/admin/index.php" class="block text-orange-600 font-bold">Dashboard</a>
+                <a href="/web/2/admin/articles.php" class="block text-gray-700">Haberler</a>
+                <a href="/web/2/admin/categories.php" class="block text-gray-700">Kategoriler</a>
+                <a href="/web/2/admin/settings.php" class="block text-gray-700">Ayarlar</a>
             </nav>
         </aside>
         <main class="flex-grow p-8">
             <h2 class="text-3xl font-bold mb-6">Dashboard</h2>
-            <p>Hoş geldin, <?php echo htmlspecialchars($_SESSION['admin']['email']); ?></p>
+            <p>Hoş geldin, yönetici.</p>
         </main>
     </div>
 </body>

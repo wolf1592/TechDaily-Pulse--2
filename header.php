@@ -40,6 +40,17 @@
                 <button onclick="toggleDarkMode()" class="text-gray-600 dark:text-gray-300 text-xl">🌙</button>
             </div>
         </nav>
+        <!-- Navbar Menu -->
+        <div class="bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-700">
+            <div class="max-w-7xl mx-auto px-4 py-2 flex gap-6 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <a href="/web/2/category.php?slug=yapay-zeka" class="hover:text-orange-600">Yapay Zeka</a>
+                <a href="/web/2/category.php?slug=otomobil" class="hover:text-orange-600">Otomobil</a>
+                <a href="/web/2/category.php?slug=donanim" class="hover:text-orange-600">Donanım</a>
+                <a href="/web/2/category.php?slug=mobil" class="hover:text-orange-600">Mobil</a>
+                <a href="/web/2/category.php?slug=oyun" class="hover:text-orange-600">Oyun</a>
+                <a href="/web/2/category.php?slug=siber-guvenlik" class="hover:text-orange-600">Siber Güvenlik</a>
+            </div>
+        </div>
     </header>
     <main class="max-w-7xl mx-auto px-4 py-8">
     <script>
