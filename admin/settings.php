@@ -1,4 +1,6 @@
 <?php
+session_start();
+if (!isset($_SESSION['admin'])) { header("Location: /web/2/admin/login.php"); exit; }
 require_once '../api/db.php';
 
 // Tabloyu oluştur (yoksa)
