@@ -1,0 +1,132 @@
+export const featuredNews = [
+  {
+    id: 1,
+    title: "Teknoloji Şirketlerinin Aklımızı Alan Birbirinden Eğlenceli 1 Nisan Şakaları",
+    image: "https://picsum.photos/seed/aprilfools/800/450",
+    category: "Haberler",
+    date: "2 Nisan 2026",
+    isLarge: true,
+  },
+  {
+    id: 2,
+    title: "WhatsApp Kullanıcıları Dikkat! Uygulamayı Taklit Eden Bir Casus Yazılım Ortaya Çıktı",
+    image: "https://picsum.photos/seed/whatsapp/400/225",
+    category: "Mobil",
+    date: "2 Nisan 2026",
+  },
+  {
+    id: 3,
+    title: "Apple'ın 50. Yılına Özel Duvar Kâğıtları Yayımlandı",
+    image: "https://picsum.photos/seed/apple50/400/225",
+    category: "Mobil",
+    date: "2 Nisan 2026",
+  },
+  {
+    id: 4,
+    title: "Aşırı Uygun Fiyata 7000 mAh Batarya Sunan HONOR Play 80 Pro Tanıtıldı",
+    image: "https://picsum.photos/seed/honor/400/225",
+    category: "Donanım",
+    date: "1 Nisan 2026",
+  },
+  {
+    id: 5,
+    title: "Tim Cook, Apple'ın 50. Yıldönümüne Özel Prototipleri Gösterdi",
+    image: "https://picsum.photos/seed/timcook/400/225",
+    category: "Haberler",
+    date: "1 Nisan 2026",
+  },
+];
+
+export const latestNews = [
+  {
+    id: 6,
+    title: "Artemis II Başarıyla Kalkmayı Başardı: 50 Yılı Aşkın Aradan Sonra Ay'a Dönüş Başladı!",
+    image: "https://picsum.photos/seed/artemis/400/225",
+    category: "Bilim",
+    date: "2 Nisan 2026",
+    author: "Ahmet Yılmaz",
+  },
+  {
+    id: 7,
+    title: "Tasarımıyla Hayran Bırakan Konsept Arazi Aracı Hyundai Boulder Duyuruldu",
+    image: "https://picsum.photos/seed/hyundai/400/225",
+    category: "Otomobil",
+    date: "2 Nisan 2026",
+    author: "Mehmet Demir",
+  },
+  {
+    id: 8,
+    title: "Telefonunuzda 5G'yi Nasıl Kapatırsınız? iPhone ve Android İçin Adım Adım Anlattık",
+    image: "https://picsum.photos/seed/5g/400/225",
+    category: "Rehber",
+    date: "1 Nisan 2026",
+    author: "Ayşe Kaya",
+  },
+  {
+    id: 9,
+    title: "Türk Telekom ve Turkcell Kullanıcılarına 5G ile Hediye İnternet Dağıtılıyor",
+    image: "https://picsum.photos/seed/internet/400/225",
+    category: "Haberler",
+    date: "1 Nisan 2026",
+    author: "Fatma Şahin",
+  },
+  {
+    id: 10,
+    title: "Samsung, Yol Tutması Sorununu Çözen Harika Bir Uygulama Yayımladı",
+    image: "https://picsum.photos/seed/samsung/400/225",
+    category: "Yazılım",
+    date: "1 Nisan 2026",
+    author: "Ali Çelik",
+  },
+  {
+    id: 11,
+    title: "Egea'nın Üçte Biri Fiyatına Satılacak Elektrikli Otomobil Chery QQ3 EV Tanıtıldı",
+    image: "https://picsum.photos/seed/chery/400/225",
+    category: "Otomobil",
+    date: "1 Nisan 2026",
+    author: "Caner Yıldız",
+  },
+  {
+    id: 12,
+    title: "Xiaomi, 4 Yaşındaki 2 Telefonu İçin Son HyperOS Güncellemesini Yayımladı",
+    image: "https://picsum.photos/seed/xiaomi/400/225",
+    category: "Mobil",
+    date: "31 Mart 2026",
+    author: "Burak Yılmaz",
+  },
+  {
+    id: 13,
+    title: "133 TL Değerindeki Oyun Steam'de Ücretsiz Oldu (Hemen Kütüphanenize Ekleyin)",
+    image: "https://picsum.photos/seed/steam/400/225",
+    category: "Oyun",
+    date: "31 Mart 2026",
+    author: "Oğuzhan Koç",
+  },
+];
+
+export const popularVideos = [
+  {
+    id: 1,
+    title: "Turkcell, Vodafone ve Turk Telekom'un 5G Performansını Şehirde Dağda Bayırda Test Ettik",
+    image: "https://picsum.photos/seed/5gtest/400/225",
+    duration: "15:24",
+  },
+  {
+    id: 2,
+    title: "APPLE ARTIK 'UCUZ' MU OLACAK?",
+    image: "https://picsum.photos/seed/appleucuz/400/225",
+    duration: "08:45",
+  },
+  {
+    id: 3,
+    title: "BU İNEK TASMASI NEDEN 2 MİLYAR DOLAR? | Teknoloji Gündemi",
+    image: "https://picsum.photos/seed/inek/400/225",
+    duration: "12:10",
+  },
+  {
+    id: 4,
+    title: "2026'da RTX 3050 LAPTOP ALINIR MI? Asus TUF Gaming F16 Testi",
+    image: "https://picsum.photos/seed/laptop/400/225",
+    duration: "20:05",
+  },
+];

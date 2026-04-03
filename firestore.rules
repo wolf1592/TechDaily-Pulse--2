@@ -1,0 +1,127 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+        (request.auth.token.email == "wolf649321@gmail.com" && request.auth.token.email_verified == true)
+      );
+    }
+
+    function isEditor() {
+      return isAuthenticated() && (
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'editor']
+      );
+    }
+
+    function isAuthor() {
+      return isAuthenticated() && (
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'editor', 'author']
+      );
+    }
+
+    function isDocOwner(docData) {
+      return isAuthenticated() && request.auth.uid == docData.authorId;
+    }
+
+    function hasRequiredArticleFields() {
+      return request.resource.data.keys().hasAll(['title', 'image', 'category', 'date', 'createdAt', 'status']);
+    }
+
+    function isValidArticle() {
+      return request.resource.data.title is string && request.resource.data.title.size() > 0 && request.resource.data.title.size() < 200 &&
+             request.resource.data.image is string && request.resource.data.image.size() < 1000 &&
+             request.resource.data.category is string && request.resource.data.category.size() < 50 &&
+             request.resource.data.date is string && request.resource.data.date.size() < 50 &&
+             request.resource.data.status in ['draft', 'pending', 'published'] &&
+             request.resource.data.createdAt is timestamp;
+    }
+
+    function hasRequiredVideoFields() {
+      return request.resource.data.keys().hasAll(['title', 'image', 'duration', 'createdAt']);
+    }
+
+    function isValidVideo() {
+      return request.resource.data.title is string && request.resource.data.title.size() > 0 && request.resource.data.title.size() < 200 &&
+             request.resource.data.image is string && request.resource.data.image.size() < 1000 &&
+             request.resource.data.duration is string && request.resource.data.duration.size() < 20 &&
+             request.resource.data.createdAt is timestamp;
+    }
+
+    function hasRequiredCommentFields() {
+      return request.resource.data.keys().hasAll(['articleId', 'text', 'authorName', 'createdAt']);
+    }
+
+    function isValidComment() {
+      return request.resource.data.articleId is string && request.resource.data.articleId.size() > 0 &&
+             request.resource.data.text is string && request.resource.data.text.size() > 0 && request.resource.data.text.size() < 1000 &&
+             request.resource.data.authorName is string && request.resource.data.authorName.size() > 0 && request.resource.data.authorName.size() < 100 &&
+             request.resource.data.createdAt is timestamp;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+    match /articles/{articleId} {
+      allow read: if true;
+      allow create: if isAuthor() && hasRequiredArticleFields() && isValidArticle();
+      allow update: if (isEditor() || (isAuthor() && isDocOwner(resource.data))) && isValidArticle();
+      allow delete: if isAdmin();
+      
+      match /revisions/{revisionId} {
+        allow read, write: if isEditor() || (isAuthor() && isDocOwner(get(/databases/$(database)/documents/articles/$(articleId)).data));
+      }
+    }
+
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /videos/{videoId} {
+      allow read: if true;
+      allow create: if isAdmin() && hasRequiredVideoFields() && isValidVideo();
+      allow update: if isAdmin() && isValidVideo();
+      allow delete: if isAdmin();
+    }
+
+    match /comments/{commentId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && hasRequiredCommentFields() && isValidComment();
+      allow update, delete: if isAdmin();
+    }
+
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /subscribers/{subscriberId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /redirections/{redirectionId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /polls/{pollId} {
+      allow read: if true;
+      allow create, delete: if isAdmin();
+      allow update: if true; // Allow voting
+    }
+  }
+}

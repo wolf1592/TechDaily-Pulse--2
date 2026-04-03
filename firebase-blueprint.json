@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "Article": {
+      "title": "Article",
+      "description": "A news article",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Title of the article" },
+        "image": { "type": "string", "description": "URL of the article image" },
+        "category": { "type": "string", "description": "Category of the article" },
+        "date": { "type": "string", "description": "Formatted date string" },
+        "author": { "type": "string", "description": "Author of the article" },
+        "authorId": { "type": "string", "description": "UID of the author" },
+        "isFeatured": { "type": "boolean", "description": "Whether the article is featured in the top section" },
+        "isLarge": { "type": "boolean", "description": "Whether the article is the large main featured one" },
+        "content": { "type": "string", "description": "Content of the article" },
+        "status": { "type": "string", "enum": ["draft", "pending", "published"], "description": "Publication status" },
+        "publishedAt": { "type": "timestamp", "description": "Scheduled publication time" },
+        "createdAt": { "type": "timestamp", "description": "Creation timestamp" },
+        "updatedAt": { "type": "timestamp", "description": "Last update timestamp" }
+      },
+      "required": ["title", "image", "category", "date", "createdAt", "status"]
+    },
+    "User": {
+      "title": "User",
+      "description": "A system user",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "editor", "author"] },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["email", "role", "createdAt"]
+    },
+    "Video": {
+      "title": "Video",
+      "description": "A popular video",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Title of the video" },
+        "image": { "type": "string", "description": "Thumbnail URL" },
+        "duration": { "type": "string", "description": "Duration string (e.g., 15:24)" },
+        "url": { "type": "string", "description": "Video URL" },
+        "createdAt": { "type": "timestamp", "description": "Creation timestamp" }
+      },
+      "required": ["title", "image", "duration", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/articles/{articleId}": {
+      "schema": { "$ref": "#/entities/Article" },
+      "description": "Collection of news articles"
+    },
+    "/videos/{videoId}": {
+      "schema": { "$ref": "#/entities/Video" },
+      "description": "Collection of popular videos"
+    }
+  }
+}
