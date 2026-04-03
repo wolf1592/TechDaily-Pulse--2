@@ -1,13 +1,14 @@
 <?php
+session_set_cookie_params(0, '/');
 session_name('ADMIN_SESSION');
 session_start();
-if (!isset($_SESSION['admin'])) { header("Location: /web/2/admin/login.php"); exit; }
+if (!isset($_SESSION['admin'])) { header("Location: login.php"); exit; }
 require_once '../api/db.php';
 
 if (isset($_GET['delete'])) {
     $stmt = $pdo->prepare("DELETE FROM categories WHERE id = ?");
     $stmt->execute([$_GET['delete']]);
-    header("Location: /web/2/admin/categories.php");
+    header("Location: categories.php");
     exit;
 }
 

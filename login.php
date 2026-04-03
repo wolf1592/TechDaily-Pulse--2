@@ -1,4 +1,5 @@
 <?php
+session_set_cookie_params(0, '/');
 session_name('ADMIN_SESSION');
 session_start();
 require_once 'api/db.php';
@@ -13,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($user) {
         $_SESSION['admin'] = $user;
-        header("Location: /web/2/admin/index.php"); // Doğru yönlendirme
+        header("Location: admin/index.php"); // Göreceli yönlendirme
         exit;
     } else {
         $error = "Geçersiz bilgiler.";
