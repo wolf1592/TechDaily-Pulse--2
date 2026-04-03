@@ -1,9 +1,9 @@
 <?php
 // Veritabanı bağlantı ayarları
 $host = 'localhost';
-$db   = 'veritabani_adiniz'; // cPanel'de oluşturduğunuz veritabanı adı
-$user = 'kullanici_adiniz';   // cPanel'de oluşturduğunuz veritabanı kullanıcısı
-$pass = 'sifreniz';           // Veritabanı şifreniz
+$db   = 'dij262vecomtr_Tech'; // cPanel'de oluşturduğunuz veritabanı adı
+$user = 'dij262vecomtr_Tech';   // cPanel'de oluşturduğunuz veritabanı kullanıcısı
+$pass = 'qQ15921594,!';           // Veritabanı şifreniz
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
