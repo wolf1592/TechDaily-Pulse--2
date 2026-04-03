@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <!-- Newsletter -->
             <div class="col-span-1 md:col-span-2">
-                <h3 class="text-lg font-bold mb-4">Teknoloji nabzını kaçırmayın</h3>
+                <h3 class="text-lg font-bold mb-4"><?php echo htmlspecialchars($settings['newsletter_title'] ?: 'Teknoloji nabzını kaçırmayın'); ?></h3>
                 <form class="flex gap-2">
                     <input type="email" placeholder="E-posta adresiniz" class="flex-grow p-2 rounded text-gray-900">
                     <button class="bg-orange-600 px-4 py-2 rounded">Abone Ol</button>
@@ -19,9 +19,12 @@
                     <?php if ($settings['rss_url']) echo '<a href="'.$settings['rss_url'].'">RSS</a>'; ?>
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <span class="bg-gray-700 px-2 py-1 rounded text-xs">#AI</span>
-                    <span class="bg-gray-700 px-2 py-1 rounded text-xs">#iPhone16</span>
-                    <span class="bg-gray-700 px-2 py-1 rounded text-xs">#Web3</span>
+                    <?php 
+                    $tags = explode(',', $settings['footer_tags']);
+                    foreach ($tags as $tag) {
+                        if (trim($tag)) echo '<span class="bg-gray-700 px-2 py-1 rounded text-xs">#'.trim($tag).'</span>';
+                    }
+                    ?>
                 </div>
             </div>
             <!-- Institutional -->

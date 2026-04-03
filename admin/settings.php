@@ -11,7 +11,7 @@ $pdo->exec("CREATE TABLE IF NOT EXISTS settings (
 )");
 
 // Başlangıç değerlerini ekle (yoksa)
-$keys = ['whatsapp_number', 'instagram_url', 'linkedin_url', 'github_url', 'rss_url', 'footer_copyright', 'footer_powered_by', 'footer_custom_script'];
+$keys = ['whatsapp_number', 'instagram_url', 'linkedin_url', 'github_url', 'rss_url', 'footer_copyright', 'footer_powered_by', 'footer_custom_script', 'newsletter_title', 'footer_tags'];
 foreach ($keys as $key) {
     $pdo->exec("INSERT IGNORE INTO settings (key_name, value) VALUES ('$key', '')");
 }
@@ -58,6 +58,8 @@ while ($row = $stmt->fetch()) {
                 <input type="text" name="rss_url" value="<?php echo htmlspecialchars($settings['rss_url']); ?>" placeholder="RSS URL" class="w-full p-2 border rounded">
                 
                 <h3 class="font-bold text-lg pt-4">Footer Ayarları</h3>
+                <input type="text" name="newsletter_title" value="<?php echo htmlspecialchars($settings['newsletter_title']); ?>" placeholder="Newsletter Başlığı" class="w-full p-2 border rounded">
+                <input type="text" name="footer_tags" value="<?php echo htmlspecialchars($settings['footer_tags']); ?>" placeholder="Etiketler (Virgülle ayırın)" class="w-full p-2 border rounded">
                 <input type="text" name="footer_copyright" value="<?php echo htmlspecialchars($settings['footer_copyright']); ?>" placeholder="Copyright Metni" class="w-full p-2 border rounded">
                 <input type="text" name="footer_powered_by" value="<?php echo htmlspecialchars($settings['footer_powered_by']); ?>" placeholder="Powered By Metni" class="w-full p-2 border rounded">
                 <textarea name="footer_custom_script" placeholder="Özel Script (Facebook Pixel vb.)" class="w-full p-2 border rounded h-32"><?php echo htmlspecialchars($settings['footer_custom_script']); ?></textarea>

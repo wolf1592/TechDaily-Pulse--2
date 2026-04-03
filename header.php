@@ -38,6 +38,9 @@
                 </div>
             </div>
             <div class="flex items-center gap-4">
+                <?php session_start(); if (isset($_SESSION['admin'])): ?>
+                    <a href="/web/2/admin/index.php" class="text-orange-600 font-bold text-sm">Admin Paneli</a>
+                <?php endif; ?>
                 <input type="text" id="search-input" placeholder="Haber ara..." class="bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full text-sm w-32 focus:w-64 transition-all duration-300">
                 <button onclick="toggleDarkMode()" class="text-gray-600 dark:text-gray-300 text-xl">🌙</button>
             </div>
