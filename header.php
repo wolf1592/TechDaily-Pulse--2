@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechDaily Pulse</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); }
+        .dark .glass { background: rgba(31, 41, 55, 0.7); }
+    </style>
     <script>
         // Dark Mode Logic
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -22,17 +26,18 @@
         <nav class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
             <div class="flex items-center gap-8">
                 <a href="/web/2/" class="text-2xl font-bold text-orange-600">TechDaily Pulse</a>
-                <div class="flex gap-6 text-gray-600 dark:text-gray-300">
-                    <a href="/web/2/category.php?slug=yapay-zeka" class="hover:text-orange-600">Yapay Zeka</a>
-                    <a href="/web/2/category.php?slug=otomobil" class="hover:text-orange-600">Otomobil</a>
-                    <a href="/web/2/category.php?slug=donanim" class="hover:text-orange-600">Donanım</a>
-                    <a href="/web/2/category.php?slug=mobil" class="hover:text-orange-600">Mobil</a>
-                    <a href="/web/2/category.php?slug=yazilim" class="hover:text-orange-600">Yazılım</a>
+                <!-- News Ticker -->
+                <div class="hidden md:flex items-center gap-2 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-sm overflow-hidden h-8 w-64">
+                    <span class="text-orange-600 font-bold flex-shrink-0">Trend:</span>
+                    <div id="ticker" class="relative h-full w-full">
+                        <span class="absolute w-full transition-all duration-500">Yapay zeka devrimi başlıyor!</span>
+                        <span class="absolute w-full transition-all duration-500 opacity-0">Yeni nesil otomobiller yolda!</span>
+                    </div>
                 </div>
             </div>
             <div class="flex items-center gap-4">
-                <input type="text" id="search-input" placeholder="Haber ara..." class="bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full text-sm">
-                <button onclick="toggleDarkMode()" class="text-gray-600 dark:text-gray-300">🌙</button>
+                <input type="text" id="search-input" placeholder="Haber ara..." class="bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full text-sm w-32 focus:w-64 transition-all duration-300">
+                <button onclick="toggleDarkMode()" class="text-gray-600 dark:text-gray-300 text-xl">🌙</button>
             </div>
         </nav>
     </header>
@@ -49,4 +54,13 @@
             var scrolled = (winScroll / height) * 100;
             document.getElementById("progress-bar").style.width = scrolled + "%";
         };
+        // Ticker Logic
+        let tickerIndex = 0;
+        const tickerItems = document.querySelectorAll('#ticker span:not(:first-child)');
+        setInterval(() => {
+            tickerItems.forEach((item, index) => {
+                item.style.opacity = index === tickerIndex ? '1' : '0';
+            });
+            tickerIndex = (tickerIndex + 1) % tickerItems.length;
+        }, 3000);
     </script>
