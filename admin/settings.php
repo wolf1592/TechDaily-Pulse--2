@@ -1,4 +1,5 @@
 <?php
+session_name('ADMIN_SESSION');
 session_start();
 if (!isset($_SESSION['admin'])) { header("Location: /web/2/admin/login.php"); exit; }
 require_once '../api/db.php';

@@ -1,4 +1,5 @@
 <?php
+session_name('ADMIN_SESSION');
 session_start();
 if (!isset($_SESSION['admin']) || $_SESSION['role'] !== 'editor') { header("Location: login.php"); exit; }
 require_once '../api/db.php';
