@@ -1,0 +1,15 @@
+{
+  "name": "TechDaily Pulse",
+  "short_name": "TechDaily",
+  "start_url": "/web/2/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ea580c",
+  "icons": [
+    {
+      "src": "https://picsum.photos/seed/tech/192/192",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

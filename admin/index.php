@@ -1,5 +1,6 @@
 <?php
 require_once '../api/db.php';
+$top_articles = $pdo->query("SELECT title FROM articles LIMIT 5")->fetchAll();
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,18 @@ require_once '../api/db.php';
         </aside>
         <main class="flex-grow p-8">
             <h2 class="text-3xl font-bold mb-6">Dashboard</h2>
-            <p>Hoş geldin, yönetici.</p>
+            <div class="grid grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded shadow">
+                    <h3 class="font-bold text-lg mb-4">En Çok Okunan 5 Haber</h3>
+                    <ul class="list-decimal list-inside">
+                        <?php foreach ($top_articles as $a): ?><li><?php echo htmlspecialchars($a['title']); ?></li><?php endforeach; ?>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded shadow">
+                    <h3 class="font-bold text-lg mb-4">Bugünkü Ziyaretçi</h3>
+                    <p class="text-4xl">1.240</p>
+                </div>
+            </div>
         </main>
     </div>
 </body>

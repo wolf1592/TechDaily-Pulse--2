@@ -8,17 +8,27 @@ $pdo->exec("CREATE TABLE IF NOT EXISTS settings (
     value TEXT
 )");
 
-// Başlangıç değeri ekle (yoksa)
-$pdo->exec("INSERT IGNORE INTO settings (key_name, value) VALUES ('whatsapp_number', '905550000000')");
+// Başlangıç değerlerini ekle (yoksa)
+$keys = ['whatsapp_number', 'instagram_url', 'linkedin_url', 'github_url', 'rss_url', 'footer_copyright', 'footer_powered_by', 'footer_custom_script'];
+foreach ($keys as $key) {
+    $pdo->exec("INSERT IGNORE INTO settings (key_name, value) VALUES ('$key', '')");
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $stmt = $pdo->prepare("UPDATE settings SET value = ? WHERE key_name = 'whatsapp_number'");
-    $stmt->execute([$_POST['whatsapp_number']]);
+    foreach ($keys as $key) {
+        if (isset($_POST[$key])) {
+            $stmt = $pdo->prepare("UPDATE settings SET value = ? WHERE key_name = ?");
+            $stmt->execute([$_POST[$key], $key]);
+        }
+    }
     $message = "Ayarlar güncellendi.";
 }
 
-$stmt = $pdo->query("SELECT value FROM settings WHERE key_name = 'whatsapp_number'");
-$whatsapp_number = $stmt->fetchColumn();
+$settings = [];
+$stmt = $pdo->query("SELECT key_name, value FROM settings");
+while ($row = $stmt->fetch()) {
+    $settings[$row['key_name']] = $row['value'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="tr">
@@ -37,9 +47,19 @@ $whatsapp_number = $stmt->fetchColumn();
         <main class="flex-grow p-8">
             <h2 class="text-3xl font-bold mb-6">Ayarlar</h2>
             <?php if (isset($message)) echo "<p class='text-green-600 mb-4'>$message</p>"; ?>
-            <form method="POST" class="bg-white p-6 rounded shadow">
-                <label class="block mb-2">WhatsApp Numarası (Örn: 905550000000)</label>
-                <input type="text" name="whatsapp_number" value="<?php echo htmlspecialchars($whatsapp_number); ?>" class="w-full p-2 mb-4 border rounded" required>
+            <form method="POST" class="bg-white p-6 rounded shadow space-y-4">
+                <h3 class="font-bold text-lg">İletişim & Sosyal Medya</h3>
+                <input type="text" name="whatsapp_number" value="<?php echo htmlspecialchars($settings['whatsapp_number']); ?>" placeholder="WhatsApp (90555...)" class="w-full p-2 border rounded">
+                <input type="text" name="instagram_url" value="<?php echo htmlspecialchars($settings['instagram_url']); ?>" placeholder="Instagram URL" class="w-full p-2 border rounded">
+                <input type="text" name="linkedin_url" value="<?php echo htmlspecialchars($settings['linkedin_url']); ?>" placeholder="LinkedIn URL" class="w-full p-2 border rounded">
+                <input type="text" name="github_url" value="<?php echo htmlspecialchars($settings['github_url']); ?>" placeholder="GitHub URL" class="w-full p-2 border rounded">
+                <input type="text" name="rss_url" value="<?php echo htmlspecialchars($settings['rss_url']); ?>" placeholder="RSS URL" class="w-full p-2 border rounded">
+                
+                <h3 class="font-bold text-lg pt-4">Footer Ayarları</h3>
+                <input type="text" name="footer_copyright" value="<?php echo htmlspecialchars($settings['footer_copyright']); ?>" placeholder="Copyright Metni" class="w-full p-2 border rounded">
+                <input type="text" name="footer_powered_by" value="<?php echo htmlspecialchars($settings['footer_powered_by']); ?>" placeholder="Powered By Metni" class="w-full p-2 border rounded">
+                <textarea name="footer_custom_script" placeholder="Özel Script (Facebook Pixel vb.)" class="w-full p-2 border rounded h-32"><?php echo htmlspecialchars($settings['footer_custom_script']); ?></textarea>
+                
                 <button type="submit" class="bg-orange-600 text-white px-4 py-2 rounded">Kaydet</button>
             </form>
         </main>
